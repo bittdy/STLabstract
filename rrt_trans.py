@@ -2,8 +2,7 @@
 
 Path planning Sample Code with Randomized Rapidly-Exploring Random Trees (RRT)
 
-author: AtsushiSakai(@Atsushi_twi)
-
+author: tdy
 """
 
 import math
@@ -407,8 +406,7 @@ class RRT:
             plt.plot(lin_x, lin_y, c = 'b')
 
     def plot_cylinder(self, x, y, size):
-        h = np.linspace(0, self.rand_area[1][2], 100)  # 把高度均分为100份
-        h.shape = (100,1)
+        h = np.linspace(0, self.rand_area[1][2], 100)  # 把高度均分为100�?        h.shape = (100,1)
         deg = list(range(0, 360, 5))
         deg.append(0)
         xl = [x + size * math.cos(np.deg2rad(d)) for d in deg]
@@ -419,8 +417,7 @@ class RRT:
         return np.array(xl), np.array(yl), z
 
     def plot_cylinder_cons(self, x, y, bound, size):
-        h = np.linspace(bound[0], bound[1], 100)  # 把高度均分为100份
-        h.shape = (100,1)
+        h = np.linspace(bound[0], bound[1], 100)  # 把高度均分为100�?        h.shape = (100,1)
         deg = list(range(0, 360, 5))
         deg.append(0)
         xl = [x + size * math.cos(np.deg2rad(d)) for d in deg]
