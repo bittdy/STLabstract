@@ -1,5 +1,4 @@
 """
-
 Path planning Sample Code with Randomized Rapidly-Exploring Random Trees (RRT)
 
 author: tdy
@@ -43,7 +42,7 @@ class RRT:
             self.cost = 0
 
     def __init__(self, start, obstacle_list, rand_area,
-                 expand_dis = 3.0, path_resolution = 0.5, max_iter = 8000, allow_speed = 3, cover_threshold = 35, goal_sample_rate = 5):
+                 expand_dis = 3.0, path_resolution = 0.5, max_iter = 500, allow_speed = 3, cover_threshold = 35, goal_sample_rate = 5):
         """
         Setting Parameter
 
@@ -113,8 +112,8 @@ class RRT:
 
             #self.draw_graph(rnd_node)
 
-        #self.draw_rrt()
-        #self.draw_path_3D(self.start_node)
+        self.draw_rrt()
+        self.draw_path_3D(self.start_node)
         self.draw_path_2D(self.start_node)
 
     def steer(self, from_node, to_node, extend_length=float('inf')):
@@ -212,6 +211,7 @@ class RRT:
         return rnd
 
     def draw_graph(self, rnd = None):
+        plt.figure(3)
         plt.clf()
         # for stopping simulation with the esc key.
         plt.gcf().canvas.mpl_connect('key_release_event',
@@ -257,7 +257,7 @@ class RRT:
 
     #delete the other nodes
     def draw_rrt(self):
-
+        plt.figure(2)
         plt.clf()
         ax3d = plt.axes(projection = '3d')
 
@@ -293,6 +293,7 @@ class RRT:
 
     #construct the path in two dimensions, then can get the start point through ginput()
     def draw_path_2D(self, start_point):  # start point needs to be a node
+        plt.figure(1)
         plt.clf()
 
         reach_list = [x for x in self.select_nd if self.calc_speed(x, start_point) < self.allow_speed]
@@ -338,6 +339,7 @@ class RRT:
 
     #construct the path in three dimensions
     def draw_path_3D(self, start_point):  #start point needs to be a node
+        plt.figure(4)
         plt.clf()
         ax3d = plt.axes(projection='3d')
 
@@ -406,7 +408,8 @@ class RRT:
             plt.plot(lin_x, lin_y, c = 'b')
 
     def plot_cylinder(self, x, y, size):
-        h = np.linspace(0, self.rand_area[1][2], 100)  # 把高度均分为100�?        h.shape = (100,1)
+        h = np.linspace(0, self.rand_area[1][2], 100)  # 把高度均分为100�?
+        h.shape = (100,1)
         deg = list(range(0, 360, 5))
         deg.append(0)
         xl = [x + size * math.cos(np.deg2rad(d)) for d in deg]
@@ -417,7 +420,8 @@ class RRT:
         return np.array(xl), np.array(yl), z
 
     def plot_cylinder_cons(self, x, y, bound, size):
-        h = np.linspace(bound[0], bound[1], 100)  # 把高度均分为100�?        h.shape = (100,1)
+        h = np.linspace(bound[0], bound[1], 100)  # 把高度均分为100�?
+        h.shape = (100,1)
         deg = list(range(0, 360, 5))
         deg.append(0)
         xl = [x + size * math.cos(np.deg2rad(d)) for d in deg]
@@ -504,8 +508,8 @@ def main(gx=6.0, gy=10.0):
 
     # Draw final path
     if show_animation:
-        #rrt.draw_graph()
-        #rrt.draw_rrt()
+        rrt.draw_graph()
+        rrt.draw_rrt()
 
         plt.grid(True)
         plt.pause(0.01)  # Need for Mac
